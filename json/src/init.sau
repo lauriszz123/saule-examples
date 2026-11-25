@@ -358,7 +358,7 @@ export class Json
       return "null"
     end
 
-    return match type(value)
+    return match typeof(value)
       case "boolean" then Json.encodeBool((value as boolean)!)
 
       case "integer" then tostring(value as integer)
@@ -437,7 +437,7 @@ export class Json
 
     local count: integer = 0
     for k, v in t do
-      if type(k) != "integer" then
+      if k is not integer then
         return false
       end
       count = count + 1

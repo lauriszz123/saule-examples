@@ -58,7 +58,7 @@ class Main
       return
     end
 
-    match type(v)
+    match typeof(v)
       case "table" then Main.dumpTable(v as table, indent)
 
       case t then println(indent .. "(" .. t .. ") " .. tostring(v))
@@ -77,7 +77,7 @@ class Main
       if v == nil then
         println(label .. ": nil")
       else
-        match type(v)
+        match typeof(v)
           case "table" then
             println(label .. ":")
             Main.dumpTable(v, next)
