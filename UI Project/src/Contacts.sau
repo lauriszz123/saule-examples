@@ -30,7 +30,7 @@ export class Contact
 	end
 end
 
--- A form that files what you type into a sortable table.
+-- A form that files what is typed into a sortable table.
 --
 -- Stateful rather than `context.state`: there are eight fields, a growing list
 -- and a validation message, and they want names and types rather than string

@@ -41,8 +41,8 @@ end
 --         body
 --     end
 --
--- Escape pops it too. A route that swallowed the key would be a route you
--- could only leave with the mouse.
+-- Escape pops it too. A route that swallowed the key would be a route that
+-- could only be left with the mouse.
 export class RouteScreen extends View
 	title: string
 	actions: View[]

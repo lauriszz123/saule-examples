@@ -2,7 +2,7 @@
 
 Example projects for [Saule](https://github.com/lauriszz123/saule), a
 statically typed, class-oriented scripting language. Each folder is an
-ordinary Saule project you can read and run.
+ordinary Saule project to read and run.
 
 ```sh
 git clone https://github.com/lauriszz123/saule-examples.git
@@ -17,7 +17,7 @@ most of these file by file.
 
 ## The projects
 
-Grouped by what you need to know to read them, not by how long they are.
+Grouped by what needs to be known to read them, not by how long they are.
 
 ### Simple
 

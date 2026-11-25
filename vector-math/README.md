@@ -35,7 +35,7 @@ a `nil` operand never reaches an overload.
 **`OpConcat` takes `..` over completely.** `Path` joins with `..`, which means
 `"path = " .. somePath` is a *type error*: `..` is right-associative, so the
 `Path` lands on the left and its `concat` runs, and `concat` wants a `Path`.
-Use `tostring(somePath)` when you want the string. `Vec2` has no `OpConcat`, so
+Use `tostring(somePath)` when the string is wanted. `Vec2` has no `OpConcat`, so
 it interpolates directly — `"a = " .. a` is fine and goes through `OpToString`.
 
 ## Files

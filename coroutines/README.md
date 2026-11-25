@@ -18,7 +18,7 @@ call stack intact. One thread, no locks: `resume` transfers control in,
 | Part | Module | The point |
 |---|---|---|
 | 1 | `src/main.sau` | `resume`, `for … in`, and the four statuses |
-| 2 | `src/stream.sau` | Combinators over `Coroutine<T>` — `map`, `filter`, `take`, `chunk`, `interleave` — and infinite sources that cost only what you take |
+| 2 | `src/stream.sau` | Combinators over `Coroutine<T>` — `map`, `filter`, `take`, `chunk`, `interleave` — and infinite sources that cost only what is taken |
 | 3 | `src/lexer.sau` | Stackful yielding: `scan` and `number` are ordinary functions that yield from two frames below the body |
 | 4 | `src/calc.sau` | The consumer half — a recursive-descent parser that pulls one token at a time and looks one ahead |
 | 5 | `src/scheduler.sau` | Tasks as coroutines: round-robin slices, a task that fails without taking the others down, and `yield` inside a `try` |

@@ -35,7 +35,7 @@ examples/markdown/
 
 Markdown is not context-free and cannot be parsed with one scan. `*` means
 emphasis inside a paragraph and nothing at all inside a fenced code block, and
-you cannot know which until you know what block you are in.
+which it is cannot be known until the enclosing block is.
 
 So: **blocks first, inlines second.**
 
@@ -48,7 +48,7 @@ pass would slot in — between the two, stripping `[id]: url` lines into a map
 the inline pass consults.
 
 Saule has **no pattern language**: `String.find` and `String.replace` work on
-literal text. That rules out a regex-driven parser and pushes you toward a
+literal text. That rules out a regex-driven parser and pushes toward a
 character cursor, which is the right implementation for Markdown regardless.
 
 ---
@@ -325,7 +325,7 @@ which turns the newlines into `Inline.SoftBreak`.
 ## InlineParser
 
 `src/InlineParser.sau`. A character cursor over one block's raw text.
-1-based indices, `String.sub` for slicing, `String.byte` when you need to
+1-based indices, `String.sub` for slicing, `String.byte` to
 compare a character cheaply.
 
 ```saule
@@ -383,14 +383,14 @@ export class InlineParser
 end
 ```
 
-> That `if` ladder is what the code actually looks like, and it is ugly. If
-> you would rather read a `match`, dispatch on `String.byte` instead — integer
+> That `if` ladder is what the code actually looks like, and it is ugly. For
+> a `match` instead, dispatch on `String.byte` — integer
 > literal patterns make it a flat `match` with a `case _` fallback, and it is
 > faster besides. Worth doing on the second pass, not the first.
 
 **The `pending` buffer is the core trick.** Literal characters accumulate into
 a string; every time a real node is produced, `flush` emits the accumulated
-text as one `Inline.Text` and clears it. Without it you get one `Inline.Text`
+text as one `Inline.Text` and clears it. Without it there is one `Inline.Text`
 per character and a renderer that lays out a hundred views per sentence.
 
 ### Each rule
@@ -473,7 +473,7 @@ Saule has no Unicode character-class table, so approximate it: drop the dozen
 punctuation codepoints that actually appear in prose (`—` 8212, `–` 8211,
 `…` 8230, the curly quotes 8216–8221, `«»` 171/187, `·` 183, `•` 8226) and keep
 everything else above 127. A `table` of banned codepoints checked with
-`String.byte` is ten lines and covers every document you will meet. It will not
+`String.byte` is ten lines and covers every document likely to be met. It will not
 match GitHub on Cyrillic or CJK — GitHub keeps those too, so it will — and it
 will not collide.
 
@@ -531,7 +531,7 @@ listed in [md-viewer's `dependencies`](../saule.config).
 
 ## Edge cases that will bite
 
-Collect these as [golden files](07-testing.md#golden-files) as you hit them.
+Collect these as [golden files](07-testing.md#golden-files) as they come up.
 
 | Input | Must produce |
 |---|---|

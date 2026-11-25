@@ -81,7 +81,7 @@ done
 ```
 
 Regenerate with a `--bless` flag that writes `$actual` over `$expected`. Then
-`git diff` shows exactly what your parser change did to every case — which is
+`git diff` shows exactly what a parser change did to every case — which is
 the property that makes golden files worth the setup.
 
 **Seed the cases from the
@@ -137,7 +137,7 @@ The Markdown suites do not fit that per-file shape, so add them as a block that
 runs `examples/markdown/tests/run.sh` and folds its exit status into
 `failures`.
 
-Respect the script's existing conventions when you do: honour `SAULE_BIN`, and
+Respect the script's existing conventions when doing so: honour `SAULE_BIN`, and
 make `run.sh` exit non-zero on any mismatch so CI can gate on it.
 
 ---

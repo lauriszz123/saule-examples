@@ -38,7 +38,7 @@ end
 They are functions rather than views on purpose. A `View` per AST node puts a
 `body` — and therefore an `Element`, a rebuild and a
 [claim](#claiming) — between every `Strong` and its text. For a leaf that draws
-three words, all of that is overhead you would then have to reason about. The
+three words, all of that is overhead that would then have to be reasoned about. The
 things that *are* views are the ones that need element state: the
 [code block](#block-by-block-mapping) (it scrolls), the
 [table](#block-by-block-mapping) (it lays out columns), and the
@@ -86,7 +86,7 @@ duplicates `Text`'s wrapping, caching and alignment, all of which already work.
 in `Text.layout` and `Text.paint` goes through `style.measure`,
 `style.lineHeight`, `style.draw` and `style.apply` — and *all four* of those
 call `self.applyFont()`. `applyFont` is public and virtual. Override it and
-UIKit's own `Text` view renders in any face you like:
+UIKit's own `Text` view renders in any face:
 
 ```saule
 export enum Face
@@ -151,12 +151,12 @@ Two traps this closes:
 1. **Never leave `size` nil on a styled run.** `TextStyle.fontScale` returns
    `1.0` for a nil size and `Display.scale()` otherwise, and `measure` divides
    by it. A nil size means the default face at whatever the transform does —
-   which measures wrong the moment you mix it with a sized run on the same line.
+   which measures wrong the moment it is mixed with a sized run on the same line.
    Always give `MdTextStyle` a size, even the body size.
 2. **Do not use `Text.font()` / `.foregroundStyle()` on styled runs.** They
    call `withSize` / `withColor` on the style — which is why those overrides
    exist above. With them, the modifiers are safe. Without them, the face
-   vanishes and only some of your bold text is bold, which is a maddening bug
+   vanishes and only some of the bold text is bold, which is a maddening bug
    to chase. Construct with `Text(data, style)` and let the style carry
    everything.
 
@@ -242,12 +242,12 @@ Five files in `md-viewer/assets/`, plus the icon font:
 All paths go through `Assets.resolve`, which makes them absolute against
 `Project.root` — a bare relative path resolves against the *shell's* working
 directory, so `saule run examples/md-viewer` from the repo root would find
-nothing. Point the icon font at yours too:
+nothing. Point the icon font at the project's own too:
 `IconFont.setFontPath("assets/MaterialIcons-Regular.ttf")`.
 
 Pick fonts with a licence that allows redistribution (SIL OFL: Inter, JetBrains
-Mono, Source Sans/Code Pro all qualify). If you would rather not vendor
-anything, register nothing — every face falls back to the engine default and
+Mono, Source Sans/Code Pro all qualify). To vendor
+nothing, register nothing — every face falls back to the engine default and
 the app still runs, just without bold.
 
 ---
@@ -314,7 +314,7 @@ inside a flow run is the trick — it eats the remainder of the line. If that
 misbehaves, the fallback is to have `BlockRenderer.paragraph` split the inline
 list on `HardBreak` and emit one `FlowStack` per hard-broken line inside a
 `VStack`. That is more code and more obviously correct; switch to it the moment
-the `Expand` version surprises you.
+the `Expand` version does something surprising.
 
 ### RunStyle
 
@@ -346,7 +346,7 @@ reason `Face` has a `BoldItalic` variant. `***both***` parses as `Strong` around
 ## BlockRenderer
 
 A `match` over `Block`, and the exhaustiveness check is doing real work here:
-add a variant to the enum and this function stops compiling until you handle it.
+add a variant to the enum and this function stops compiling until it is handled.
 
 ```saule
 static fn render(block: Block, style: MarkdownStyle) -> View
@@ -430,16 +430,16 @@ break theme switching.
 
 ## Claiming
 
-The one UIKit rule that will cost you an afternoon if you skip it. From the
+The one UIKit rule that costs an afternoon when skipped. From the
 toolkit's own README:
 
 > every `View`-typed field in this kit is assigned through `claimed` /
 > `claimedAll`
 
 Because `View.init` announces every constructed view to the innermost open
-content block, a view you build and then *store in a field* has already been
+content block, a view that is built and then *stored in a field* has already been
 recorded as a loose sibling. It must be claimed back, or it renders twice —
-once where you put it, once floating where it was built.
+once where it was put, once floating where it was built.
 
 Rules for the renderer:
 
@@ -449,7 +449,7 @@ Rules for the renderer:
   `BlockRenderer.renderAll` returns — go in via `children:` (the constructors
   route it through `childrenOf` / `claimedAll`) or via `show(child)` inside the
   block.
-- A custom view of yours storing a `View` field assigns it through
+- A custom view storing a `View` field assigns it through
   `claimed(...)`, and a `table<View>` field through `claimedAll(...)`.
 
 `CodeBlockView`, `MdTableView` and `LinkSpan` all hold children — all three
@@ -534,7 +534,7 @@ Full click path: [Sequence: clicking a link](02-architecture.md#sequence-clickin
 | `List(unordered)` | `VStack` of `HStack(bullet, content)` | bullet is `Text("•")`, or an `Icon` for nesting depth 2+ |
 | `List(ordered)` | same, marker `Text(start + i .. ".")` | right-align the numbers in a fixed-width `Frame` so the text lines up |
 | `ListItem(checked != nil)` | `Checkbox` (UIKit, `Controls.sau`) + content | read-only: pass no `onChange` |
-| `Table` | `Grid` or a `VStack` of `HStack` rows | UIKit's `TableView` is built for typed data rows; a Markdown table's cells are inline content, so a plain `Grid` with your own header styling is the shorter road |
+| `Table` | `Grid` or a `VStack` of `HStack` rows | UIKit's `TableView` is built for typed data rows; a Markdown table's cells are inline content, so a plain `Grid` with its own header styling is the shorter road |
 | `Rule` | `Divider` | |
 | `Inline.Image` | `Image(...)` via `Graphics.newImage` | resolve `src` relative to the current document's directory, same rule as [`LinkResolver`](05-app-shell.md#linkresolver). Missing file → muted alt text, never a crash |
 

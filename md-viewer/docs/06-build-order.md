@@ -2,11 +2,11 @@
 
 # 6. Build order
 
-Ten milestones. Each one **ends with something you can run and look at** —
+Ten milestones. Each one **ends with something to run and look at** —
 that is the ordering principle, and it is why the parser gets finished before
 a window exists rather than both growing at once.
 
-| # | Milestone | You can | Rough size |
+| # | Milestone | Result | Rough size |
 |---|---|---|---|
 | 0 | [Make UIKit a package](#milestone-0--make-uikit-a-package) | ✅ **done** — `saule run "examples/UI Project"` works against the package | — |
 | 1 | [Blocks, headless](#milestone-1--blocks-headless) | dump a document's block tree to the terminal | half a day |
@@ -19,7 +19,7 @@ a window exists rather than both growing at once.
 | 8 | [Polish](#milestone-8--polish) | dark mode, keyboard, missing-file screen | open-ended |
 | 9 | [Tests](#milestone-9--tests) | `./run_tests.sh` covers it | 2 hours |
 
-Estimates assume you already know the language, which you do.
+Estimates assume the language is already known.
 
 ---
 
@@ -80,7 +80,7 @@ executes *on import* of the barrel, and `Framework.sau` throws
 `view modifiers are not installed` at build time if it did not — a failure
 `saule check` cannot see.
 
-**If you ever want to undo this:** copy the folder back to
+**To undo this:** copy the folder back to
 `examples/md-viewer/src/UIKit`, drop `"../uikit"` from
 [`md-viewer/saule.config`](../saule.config), and use `from UIKit import *`.
 Everything downstream is identical.
@@ -97,8 +97,8 @@ Everything downstream is identical.
 
 **Order within the milestone:**
 
-1. `Ast.sau` — all of it, both enums, including the `Inline` variants you will
-   not produce yet. Getting the shapes right now saves a rewrite; they are
+1. `Ast.sau` — all of it, both enums, including the `Inline` variants that are
+   not produced yet. Getting the shapes right now saves a rewrite; they are
    [specified here](03-markdown-package.md#the-ast).
 2. `LineScanner.sau` — [thirty lines](03-markdown-package.md#linescanner),
    including the CRLF normalization. Do not skip that; this repo has CRLF files
@@ -154,20 +154,20 @@ Keep `dump.sau`. It stays useful all the way through
 from `BlockParser`.
 
 **Order:** literal text and the `pending` buffer first — that alone must not
-change the dump's shape. Then, one at a time, each with a case added to your
+change the dump's shape. Then, one at a time, each with a case added to the
 [edge-case list](03-markdown-package.md#edge-cases-that-will-bite):
 escapes → code spans → autolinks → links and images → emphasis → breaks.
 
 **Emphasis is the one that goes wrong.** Write the `snake_case` and `a * b * c`
-cases before you write the rule, not after.
+cases before writing the rule, not after.
 
-**Verify:** the dump now shows `Link(href=…)` nodes. Grep your own output:
+**Verify:** the dump now shows `Link(href=…)` nodes. Grep the output:
 
 ```bash
 saule run examples/markdown/src/dump.sau -- examples/md-viewer/docs/README.md | grep -c "Link("
 ```
 
-[`README.md`](README.md) has a known number of links in it. That count is your
+[`README.md`](README.md) has a known number of links in it. That count is the
 first regression test, and it becomes a
 [golden file](07-testing.md#golden-files) in Milestone 9.
 
@@ -234,16 +234,16 @@ now, with five view types, than in Milestone 7 with twelve.
 right in one paragraph, on the same baseline, in this very file. Links show in
 `style.link` colour but do nothing yet.
 
-**If bold does not appear:** the font failed to load and you fell back
-silently. `FontRegistry` prints once per face — check the terminal. If it
-loaded and text still measures wrong, you left `size` nil on the style; see
+**If bold does not appear:** the font failed to load and the fallback was
+silent. `FontRegistry` prints once per face — check the terminal. If it
+loaded and text still measures wrong, `size` was left nil on the style; see
 [trap 1](04-renderer.md#styled-runs-the-hard-part).
 
 ---
 
 ## Milestone 5 — The sidebar
 
-**Goal:** a file tree you can click.
+**Goal:** a file tree that can be clicked.
 
 **Files:** `src/app/Workspace.sau`, `src/app/DocumentStore.sau`,
 `src/app/Shell.sau`, `src/app/Sidebar.sau`, `src/app/ContentPane.sau`, and
@@ -296,7 +296,7 @@ doc) and confirm it resolves or fails cleanly rather than doing nothing silently
 
 **If a click does nothing:** check the terminal for
 `LinkSpan: no RouterScope above this link`. That message exists precisely
-because this is the failure you will hit.
+because this is the failure that will be hit.
 
 ---
 

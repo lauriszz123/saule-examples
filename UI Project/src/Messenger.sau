@@ -56,7 +56,7 @@ end
 
 -- Which of the three screens the app is showing. The signed-out pair are modes
 -- of the same view rather than routes: "create an account instead" is not
--- somewhere you navigate *back* from, it is the same screen asking for
+-- somewhere to navigate *back* from, it is the same screen asking for
 -- different fields.
 export enum Session
 	SignedOut,
@@ -385,9 +385,9 @@ class MessengerState extends State
 
 		-- A `RouteScreen` like every other screen here, not a bare stack: it is
 		-- what paints the opaque background (a route covers the window, and
-		-- without one the screen you pushed from shows through) and what puts
+		-- without one the screen it was pushed from shows through) and what puts
 		-- the back arrow there, so "I opened this by mistake" has an answer
-		-- before you have an account.
+		-- before there is an account.
 		return RouteScreen(title: "Messenger") do
 			VStack(sizing: StackSize.Fit, alignment: StackAlignment.Center, spacing: 18.0) do
 				self.brand(theme)

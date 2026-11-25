@@ -3,7 +3,7 @@
 # 5. The app shell
 
 `md-viewer/src/app/` plus `src/main.sau`. The window, the file tree, and the
-navigation that makes [the docs you are reading](README.md) clickable.
+navigation that makes [these docs](README.md) clickable.
 
 - [main.sau](#mainsau)
 - [Shell](#shell)
@@ -252,7 +252,7 @@ The rules that matter, drawn out in
   not leave the abandoned branch reachable.
 - **An anchor-only jump is still history.** `Location.equals` compares the
   anchor too, so `#the-ast` from the top of the same page pushes an entry and
-  back returns you to where you were reading.
+  back returns to the place being read.
 - **Cap the back stack** at, say, 200 entries. A reader clicking around for an
   hour should not grow it without bound.
 
@@ -262,7 +262,7 @@ The rules that matter, drawn out in
 
 The ambient lookup, copied from `Theme` — whose own source says to copy it:
 
-> Copy the pattern for any other ambient value your app needs; it is about
+> Copy the pattern for any other ambient value the app needs; it is about
 > twenty lines.
 
 `Theme` gets a typed `data.theme` field on `ElementData`; an app-side value has
@@ -312,7 +312,7 @@ end
 `nil` and its clicks do nothing, silently. That is why
 [`LinkSpan.follow`](04-renderer.md#links) prints when the router is missing —
 a click that does nothing is otherwise indistinguishable from a broken hit
-test, and you will spend an hour on the wrong one.
+test, and an hour goes on the wrong one.
 
 ---
 
@@ -344,7 +344,7 @@ end
    `docs/04-renderer.md`.
 5. **Normalize.** Split on `/`, drop `.` segments, pop one segment per `..`,
    rejoin. Do this textually — do not shell out to a real path canonicaliser,
-   which would resolve symlinks and give you a path that no longer matches the
+   which would resolve symlinks and give a path that no longer matches the
    sidebar's.
 6. **Percent-decode** `%20` and friends, so `My%20Notes.md` finds the file.
 7. **Directory link** (`../markdown/`) → try `README.md` inside it, the way
@@ -444,7 +444,7 @@ end
 ```
 
 `get` is called from `ContentPane.body` — **every rebuild**. Without the cache
-you would reparse a 90 KB document on every hover state change in the sidebar.
+a 90 KB document would be reparsed on every hover state change in the sidebar.
 With it, parsing happens once per file per session.
 
 `invalidate` is unused in v1 and is the entire hook a

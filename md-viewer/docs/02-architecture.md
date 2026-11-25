@@ -485,11 +485,11 @@ stateDiagram-v2
 ```
 
 The rule that people get wrong: **a new navigation clears the forward stack.**
-Back, then click something else, and "forward" must not offer the branch you
+Back, then click something else, and "forward" must not offer the branch that was
 abandoned.
 
 An `#anchor`-only jump within the current document is still a history entry —
-back should return you to where you were reading.
+back should return to the place being read.
 
 ---
 

@@ -42,7 +42,7 @@ then `&`, then the shifts, all of them looser than `..`, `+` and `*`.
 **`>>` is a *logical* shift.** The vacated bits are filled with zeros in both
 directions rather than with the sign bit, so `-8 >> 1` is a large positive
 number, not `-4`. It is not "divide by a power of two" for negative values —
-divide when that is what you meant. A negative shift count shifts the other
+divide when that is what is meant. A negative shift count shifts the other
 way, and shifting by 64 or more shifts every bit out and yields `0`.
 
 **There is no `~=`.** Every other binary operator has a compound form

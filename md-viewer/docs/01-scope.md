@@ -77,7 +77,7 @@ Each of these is a real cost with a real reason to defer it:
   [Parser → Two passes](03-markdown-package.md#why-two-passes).
 - **Mermaid / syntax highlighting.** Fenced blocks render as monospace text
   with their info string shown as a label. The diagrams in
-  [Architecture](02-architecture.md) will show as code in your own viewer —
+  [Architecture](02-architecture.md) will show as code in the viewer itself —
   that is expected, and rendering them is the best v2 feature on the list.
 - **Editing.** Read-only. UIKit has `TextEditor`, so a split-pane editor is
   reachable later; it is not v1.

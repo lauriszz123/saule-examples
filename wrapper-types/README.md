@@ -36,7 +36,7 @@ fn upper() -> string
 end
 ```
 
-That is not boilerplate the language could have saved you — it is the whole
+That is not boilerplate the language could have saved — it is the whole
 point. `string` is a *type* and has no members; `String` is a separate *class*
 of static functions. There is no mapping between the two anywhere in Saule, so
 a wrapper chooses its own surface: `Text` has `words()`, which `String` does

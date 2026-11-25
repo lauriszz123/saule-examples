@@ -21,7 +21,7 @@ and these examples run.
 
 A package is one file. `saule-sdk`'s macros compile a description of the
 package **into the library**: every class, every method's Saule signature and
-exported symbol, and your `///` doc comments.
+exported symbol, and the `///` doc comments.
 
 1. At startup the interpreter scans `~/.saule/native_packages/` and reads each
    library's description **out of the file, without loading it**. Each
@@ -69,7 +69,7 @@ type.
 > **Toolchain.** The build works on both Windows and Linux/WSL:
 > - **Linux / WSL** — the default `stable-x86_64-unknown-linux-gnu` builds
 >   everything. minifb loads X11/Wayland via `dlopen`, so no `-dev` headers are
->   needed. (In WSL, make sure you use the rustup `cargo`, not the old apt one —
+>   needed. (In WSL, make sure to use the rustup `cargo`, not the old apt one —
 >   `source ~/.cargo/env`.)
 > - **Windows** — use the **MSVC** toolchain; the GNU toolchain can't link the
 >   `cdylib`/`libloading` (missing `dlltool.exe`). Pin it for this folder once:
@@ -149,7 +149,7 @@ motion, buttons, the wheel, and window changes. Each entry is a positional
 record `[kind, payload…]`; the engine README has the full table.
 
 See [keyboard.sau](keyboard.sau) for the pattern: decode the records into an
-`enum` once, then `match` on it. That is how the callbacks Love2D would give you
+`enum` once, then `match` on it. That is how the callbacks Love2D would give
 (`keypressed`, `keyreleased`, `textinput`) are spelled here, and unlike
 per-frame flags it keeps two taps of the same key inside one frame apart.
 
@@ -170,9 +170,9 @@ handle registry with canvases, so one handle works everywhere:
 See [images.sau](images.sau) for all of it together — a spritesheet animation,
 wheel-driven zoom, mouse edges, and a canvas used as a pre-rendered backdrop.
 
-## Adding your own functions
+## Adding new functions
 
-In Shine2D's `src/`, or in a package of your own — the steps are the same, and
+In Shine2D's `src/`, or in a separate package — the steps are the same, and
 neither needs a checkout of the language:
 
 1. Write a plain, safe Rust function.

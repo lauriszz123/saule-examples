@@ -6,7 +6,7 @@ with back and forward.
 
 These docs are also the app's **test corpus**. The first document md-viewer
 ever renders is this one, and the links below are the links whose navigation
-you are building. When they work here, the feature is done.
+is being built. When they work here, the feature is done.
 
 ---
 
